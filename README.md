@@ -1,59 +1,96 @@
 # Vehicle Diagnostics SQL Project
 
-This project simulates real-world vehicle diagnostics using SQL. It focuses on analyzing mock CAN bus logs collected from multiple ECUs (like ECM, TCM, and BCM) to detect signal anomalies, simulate alerts, and analyze ECU behavior patterns, similar to validation process in the automotive industry.
+This project simulates real-world vehicle diagnostics using SQL. It focuses on analyzing mock CAN bus logs collected from multiple ECUs (like **ECM**, **TCM**, and **BCM**) to detect signal anomalies, simulate alerts, and analyze ECU behavior patterns, closely reflecting validation practices in the automotive industry.
 
 ---
 
 ## Project Structure
 
 ```
-├── dataset/                → CSV logs with simulated vehicle telemetry
-├── queries/                → Organized SQL query files
-├── screenshots/            → Captures of query results (to be added)
-├── README.md               → Project overview (this file)
-├── project_pitch.md        → summary (to be added)
+Vehicle-Diagnostic-SQL-Analyzer/
+│
+├── dataset/                
+│   ├── vehicle_logs_mock.csv          # 200-row telemetry dataset
+│   ├── ECU_Registry.csv               # Static ECU references
+│   └── faulty_logs_sample.csv         # Alert test inputs
+│
+├── queries/
+│   ├── anomaly_detection.sql          # Speed vs RPM, Temp vs Fuel, Idle mismatch
+│   ├── ecu_behavior_analysis.sql      # ECU frequency, drops, wildcard filters
+│   ├── alert_logic_simulation.sql     # CASE-based alert logic 
+│   ├── timestamp_analysis.sql         # Delay, gap, duplicate checks 
+│   └── summary_views.sql              # Summary dashboards 
+│
+├── screenshots/
+│   ├── speed_rpm_mismatch.png
+│   ├── high_temp_low_fuel.png
+│   ├── idling_rpm_anomaly.png
+│   ├── canid_pattern_highspeed.png
+│   ├── ecu_message_count.png
+│   ├── ecu_low_activity_filter.png
+│   ├── unique_canids_per_ecu.png
+│   └── ... (more to be added)
+│
+├── README.md                  
+├── project_pitch.md          
+└── LICENSE (optional)
 ```
 
 ---
 
 ## Dataset Overview
 
-The dataset `vehicle_logs_mock.csv` includes 200 entries with the following fields:
+Primary file: `vehicle_logs_mock.csv`  
+Total entries: **200**
 
-| Field         | Description                              |
-|---------------|------------------------------------------|
-| Timestamp     | Time of CAN message capture              |
-| CAN_ID        | Unique identifier for a CAN signal       |
-| ECU           | Electronic Control Unit (ECM, TCM, BCM)  |
-| RPM           | Engine speed (rev/min)                   |
-| Speed         | Vehicle speed (km/h)                     |
-| Engine_Temp   | Engine temperature (°C)                  |
-| Fuel_Level    | Remaining fuel (%)                       |
+| Column         | Description                          |
+|----------------|--------------------------------------|
+| `Timestamp`    | Time of CAN message capture          |
+| `CAN_ID`       | Unique identifier for CAN signal     |
+| `ECU`          | Source control unit (e.g., ECM)      |
+| `RPM`          | Engine speed (rev/min)               |
+| `Speed`        | Vehicle speed (km/h)                 |
+| `Engine_Temp`  | Engine temperature (°C)              |
+| `Fuel_Level`   | Remaining fuel (%)                   |
 
 ---
 
 ## Project Objectives
 
-- Detect abnormal signal patterns (e.g., Speed > 120 km/h)
-- Analyze ECU activity and signal frequency
-- Simulate diagnostic alerts (e.g., high engine temp + low fuel)
-- Practice core SQL operations: SELECT, WHERE, GROUP BY, COUNT, HAVING
+- Detect abnormal signal patterns (e.g., Speed > 120 km/h while RPM < 2000)
+- Analyze ECU message patterns, frequency, and unique IDs
+- Identify logging gaps, drops, and inconsistencies
+- Simulate alert logic for overheat, idle errors, fuel loss
+- Build time-based dashboards from CAN logs
+
+---
+
+## SQL Concepts Practiced
+
+- `SELECT`, `WHERE`, `GROUP BY`, `ORDER BY`
+- `COUNT`, `DISTINCT`, `HAVING`, `LIKE`, `CASE`
+- Basic time manipulation with `STRFTIME`
+- Commenting, annotation, modular query building
 
 ---
 
 ## Tools Used
 
-- SQLite (for running SQL queries)
-- Google Sheets (for dataset preparation)
-- GitHub (for version control and documentation)
+- **SQLiteStudio 3.4.17** – Query execution
+- **Google Sheets** – CSV generation
+- **GitHub** – Version control, documentation
 
 ---
 
-## Status
+## Current Status
 
 - [x] Dataset generated and uploaded
-- [ ] Anomaly detection queries
-- [ ] ECU behavior queries
-- [ ] Alert logic simulations
-- [ ] Screenshots and result analysis
-- [ ] Final project pitch and documentation
+- [x] Anomaly detection queries
+- [x] ECU behavior analysis queries
+- [ ] Alert logic simulation (in progress)
+- [ ] Timestamp-based diagnostics (in progress)
+- [ ] Final pitch, project wrap-up
+
+---
+
+> _This project aims to bridge embedded diagnostics with data analytics using foundational SQL queries._  
